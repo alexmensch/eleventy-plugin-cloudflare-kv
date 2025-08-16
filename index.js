@@ -12,13 +12,13 @@ async function fetchFromKV(kvBaseUrl, apiToken) {
   const response = await fetch(`${kvBaseUrl}/keys`, {
     headers: {
       Authorization: `Bearer ${apiToken}`,
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   });
 
   if (!response.ok) {
     throw new Error(
-      `❌ Cloudflare KV API error: ${response.status} ${response.statusText}`,
+      `❌ Cloudflare KV API error: ${response.status} ${response.statusText}`
     );
   }
 
@@ -28,8 +28,8 @@ async function fetchFromKV(kvBaseUrl, apiToken) {
 async function fetchKVValue(kvBaseUrl, apiToken, key) {
   const response = await fetch(`${kvBaseUrl}/values/${key}`, {
     headers: {
-      Authorization: `Bearer ${apiToken}`,
-    },
+      Authorization: `Bearer ${apiToken}`
+    }
   });
 
   if (response.status === 404) {
@@ -57,7 +57,7 @@ async function fetchKVCollections(config, quiet) {
 
   if (!ACCOUNT_ID || !API_TOKEN || !NAMESPACE_ID) {
     throw new Error(
-      `❌ Cloudflare credential environment variables not found. Expected: ${accountIdVar}, ${apiTokenVar}, ${namespaceIdVar}`,
+      `❌ Cloudflare credential environment variables not found. Expected: ${accountIdVar}, ${apiTokenVar}, ${namespaceIdVar}`
     );
   }
 
@@ -105,22 +105,22 @@ async function fetchKVCollections(config, quiet) {
           collections[collectionName][itemKey] = {
             content: parsed.content,
             ...parsed.data,
-            kvKey: kvKey,
+            kvKey: kvKey
           };
         } catch (error) {
           console.error(`❌ Error processing KV key ${keyObj.name}:`, error);
         }
-      }),
+      })
     );
 
     const totalItems = Object.values(collections).reduce(
       (sum, collection) => sum + Object.keys(collection).length,
-      0,
+      0
     );
-    
+
     if (!quiet) {
       console.log(
-        `✅ Successfully processed ${totalItems} items across ${Object.keys(collections).length} collection(s)`,
+        `✅ Successfully processed ${totalItems} items across ${Object.keys(collections).length} collection(s)`
       );
     }
 
@@ -136,7 +136,8 @@ export default function kvCollectionsPlugin(eleventyConfig, userConfig = {}) {
     envVars: {
       accountId: userConfig.accountId || DEFAULT_ENV_VARS.accountId,
       namespaceId: userConfig.namespaceId || DEFAULT_ENV_VARS.namespaceId,
-      cloudflareAPIToken: userConfig.cloudflareAPIToken || DEFAULT_ENV_VARS.cloudflareAPIToken
+      cloudflareAPIToken:
+        userConfig.cloudflareAPIToken || DEFAULT_ENV_VARS.cloudflareAPIToken
     },
     metadata: userConfig.metadata || {},
     quiet: userConfig.quiet || false
@@ -166,8 +167,12 @@ export default function kvCollectionsPlugin(eleventyConfig, userConfig = {}) {
             // Add any additional metadata specified by user
             const additionalMetadata = {};
             Object.entries(config.metadata).forEach(([key, value]) => {
-              if (typeof value === 'function') {
-                additionalMetadata[key] = value(itemData, itemKey, collectionName);
+              if (typeof value === "function") {
+                additionalMetadata[key] = value(
+                  itemData,
+                  itemKey,
+                  collectionName
+                );
               } else {
                 additionalMetadata[key] = value;
               }
@@ -175,7 +180,7 @@ export default function kvCollectionsPlugin(eleventyConfig, userConfig = {}) {
 
             return {
               ...itemData,
-              ...additionalMetadata,
+              ...additionalMetadata
             };
           });
         });

@@ -26,7 +26,7 @@ Add the plugin to your `.eleventy.js` configuration:
 ```javascript
 import kvCollectionsPlugin from "eleventy-plugin-cloudflare-kv";
 
-export default function(eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addPlugin(kvCollectionsPlugin, {
     metadata: {
       permalink: (itemData, itemKey, collectionName) => {
@@ -39,13 +39,13 @@ export default function(eleventyConfig) {
 
 ### Configuration Options
 
-| Option | Type | Required | Description |
-|--------|------|----------|-------------|
-| `metadata` | Object | No | Additional metadata to add to each item |
-| `accountId` | String | No | Environment variable name for Cloudflare Account ID (default: `CLOUDFLARE_ACCOUNT_ID`) |
-| `namespaceId` | String | No | Environment variable name for KV Namespace ID (default: `CLOUDFLARE_KV_NS_ID`) |
-| `cloudflareAPIToken` | String | No | Environment variable name for API Token (default: `CLOUDFLARE_API_TOKEN`) |
-| `quiet` | Boolean | No | Suppress console output except errors (default: `false`) |
+| Option               | Type    | Required | Description                                                                            |
+| -------------------- | ------- | -------- | -------------------------------------------------------------------------------------- |
+| `metadata`           | Object  | No       | Additional metadata to add to each item                                                |
+| `accountId`          | String  | No       | Environment variable name for Cloudflare Account ID (default: `CLOUDFLARE_ACCOUNT_ID`) |
+| `namespaceId`        | String  | No       | Environment variable name for KV Namespace ID (default: `CLOUDFLARE_KV_NS_ID`)         |
+| `cloudflareAPIToken` | String  | No       | Environment variable name for API Token (default: `CLOUDFLARE_API_TOKEN`)              |
+| `quiet`              | Boolean | No       | Suppress console output except errors (default: `false`)                               |
 
 ### Environment Variables
 
@@ -53,7 +53,7 @@ Set these environment variables in your build environment:
 
 ```bash
 CLOUDFLARE_ACCOUNT_ID=your-account-id
-CLOUDFLARE_KV_NS_ID=your-namespace-id  
+CLOUDFLARE_KV_NS_ID=your-namespace-id
 CLOUDFLARE_API_TOKEN=your-api-token
 ```
 
@@ -75,7 +75,7 @@ eleventyConfig.addPlugin(kvCollectionsPlugin, {
 The plugin organizes content into collections based on your KV key structure:
 
 - `posts/hello-world` → Collection: `posts`, Item key: `hello-world`
-- `pages/about` → Collection: `pages`, Item key: `about`  
+- `pages/about` → Collection: `pages`, Item key: `about`
 - `standalone` → Collection: `none`, Item key: `standalone`
 
 ### Content Format
