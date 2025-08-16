@@ -68,11 +68,15 @@ async function fetchKVCollections(config, quiet) {
     const keys = keysResponse.result;
 
     if (!keys || keys.length === 0) {
-      if (!quiet) console.log("❌ No keys found in KV namespace");
+      if (!quiet) {
+        console.log("❌ No keys found in KV namespace");
+      }
       return {};
     }
 
-    if (!quiet) console.log(`✅ Found ${keys.length} keys in KV namespace`);
+    if (!quiet) {
+      console.log(`✅ Found ${keys.length} keys in KV namespace`);
+    }
 
     const collections = {};
 
@@ -105,7 +109,7 @@ async function fetchKVCollections(config, quiet) {
           collections[collectionName][itemKey] = {
             content: parsed.content,
             ...parsed.data,
-            kvKey: kvKey
+            kvKey
           };
         } catch (error) {
           console.error(`❌ Error processing KV key ${keyObj.name}:`, error);
@@ -148,7 +152,9 @@ export default function kvCollectionsPlugin(eleventyConfig, userConfig = {}) {
 
   eleventyConfig.on("eleventy.before", async () => {
     if (!kvDataFetched) {
-      if (!config.quiet) console.log("🔄 Fetching KV collections...");
+      if (!config.quiet) {
+        console.log("🔄 Fetching KV collections...");
+      }
       kvCollections = await fetchKVCollections(config, config.quiet);
       kvDataFetched = true;
 
