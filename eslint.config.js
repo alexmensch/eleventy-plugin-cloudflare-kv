@@ -15,7 +15,6 @@ export default [
     },
     rules: {
       // Possible Errors
-      "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
 
       // Best Practices

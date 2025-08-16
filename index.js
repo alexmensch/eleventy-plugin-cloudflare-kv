@@ -160,7 +160,7 @@ export default function kvCollectionsPlugin(eleventyConfig, userConfig = {}) {
       }
 
       Object.keys(kvCollections).forEach((collectionName) => {
-        eleventyConfig.addCollection(collectionName, (collectionApi) => {
+        eleventyConfig.addCollection(collectionName, (_collectionApi) => {
           const collection = kvCollections[collectionName];
 
           return Object.entries(collection).map(([itemKey, itemData]) => {
