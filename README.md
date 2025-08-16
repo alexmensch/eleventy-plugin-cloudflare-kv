@@ -134,7 +134,7 @@ Metadata values can be either constants or functions that receive:
 
 ## Requirements
 
-- Node.js 14+
+- Node.js 20+
 - Eleventy 2.0+
 - Cloudflare KV namespace with API token
 
