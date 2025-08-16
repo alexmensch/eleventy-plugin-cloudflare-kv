@@ -41,6 +41,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "chai": "^4.3.7",
+    "c8": "^9.1.0",
     "eslint": "^8.57.0",
     "@eslint/js": "^8.57.0",
     "mocha": "^10.2.0",
@@ -48,6 +49,8 @@
   },
   "scripts": {
     "test": "mocha test/*.test.js",
+    "test:coverage": "c8 mocha test/*.test.js",
+    "test:coverage:report": "c8 --reporter=html mocha test/*.test.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
