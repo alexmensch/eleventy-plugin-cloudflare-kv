@@ -14,7 +14,6 @@ describe("eleventy-cloudflare-kv", () => {
   let fetchStub;
   let consoleLogStub;
   let consoleErrorStub;
-  let processEnvStub;
 
   beforeEach(() => {
     fetchStub = sinon.stub(globalThis, "fetch");
@@ -22,7 +21,7 @@ describe("eleventy-cloudflare-kv", () => {
     consoleErrorStub = sinon.stub(console, "error");
 
     // Mock process.env
-    processEnvStub = sinon.stub(process, "env").value({
+    sinon.stub(process, "env").value({
       CLOUDFLARE_ACCOUNT_ID: "test-account-id",
       CLOUDFLARE_KV_NS_ID: "test-namespace-id",
       CLOUDFLARE_API_TOKEN: "test-api-token"
@@ -265,7 +264,7 @@ This is test content`)
     const requiredEnvVars = [
       "CLOUDFLARE_ACCOUNT_ID",
       "CLOUDFLARE_API_TOKEN",
-      "CLOUDFLARE_KV_NS_ID",
+      "CLOUDFLARE_KV_NS_ID"
     ];
 
     for (const varName of requiredEnvVars) {
@@ -419,10 +418,10 @@ About content`)
       expect(mockEleventyConfig.addCollection).to.have.been.calledWith("posts");
       expect(mockEleventyConfig.addCollection).to.have.been.calledWith("pages");
       expect(consoleLogStub).to.have.been.calledWith(
-        "📁 Collection \"posts\": 2 items"
+        '📁 Collection "posts": 2 items'
       );
       expect(consoleLogStub).to.have.been.calledWith(
-        "📁 Collection \"pages\": 1 items"
+        '📁 Collection "pages": 1 items'
       );
     });
 

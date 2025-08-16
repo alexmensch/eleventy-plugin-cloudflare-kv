@@ -32,7 +32,7 @@ export default [
     }
   },
   {
-    files: ["test/**/*.js"],
+    files: ["test/**/*.cjs"],
     languageOptions: {
       globals: {
         describe: "readonly",
@@ -40,7 +40,9 @@ export default [
         before: "readonly",
         after: "readonly",
         beforeEach: "readonly",
-        afterEach: "readonly"
+        afterEach: "readonly",
+        console: "readonly",
+        process: "readonly"
       }
     }
   }
