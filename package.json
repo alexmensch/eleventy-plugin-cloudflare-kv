@@ -1,0 +1,54 @@
+{
+  "name": "eleventy-plugin-cloudflare-kv",
+  "version": "1.0.0",
+  "description": "Eleventy plugin that builds collections from content stored in Cloudflare KV as a simple CMS.",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "plugin",
+    "eleventy-plugin",
+    "cloudflare",
+    "kv",
+    "collections",
+    "cms",
+    "headless"
+  ],
+  "author": {
+    "email": "hello@alxm.me",
+    "name": "Alex Marshall",
+    "url": "https://alxm.me"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmensch/eleventy-plugin-cloudflare-kv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexmensch/eleventy-plugin-cloudflare-kv/issues"
+  },
+  "homepage": "https://github.com/alexmensch/eleventy-plugin-cloudflare-kv#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@11ty/eleventy": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  },
+  "scripts": {
+    "test": "mocha test/*.test.js"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
+}

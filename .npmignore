@@ -1,0 +1,16 @@
+# Source and development files
+test/
+example/
+.github/
+.vscode/
+.idea/
+
+# Environment and config files
+.env*
+.DS_Store
+Thumbs.db
+*.log
+
+# Git files
+.git/
+.gitignore
