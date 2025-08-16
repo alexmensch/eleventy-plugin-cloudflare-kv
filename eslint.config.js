@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import globals from "globals";
 
 export default [
   js.configs.recommended,
@@ -8,19 +9,33 @@ export default [
       ecmaVersion: 2022,
       sourceType: "module",
       globals: {
-        console: "readonly",
-        process: "readonly",
-        fetch: "readonly"
+        ...globals.node
       }
     },
     rules: {
       // Possible Errors
       "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "no-prototype-builtins": "error",
+      "no-template-curly-in-string": "error",
 
       // Best Practices
       eqeqeq: "error",
       "no-eval": "error",
       "no-implied-eval": "error",
+      "consistent-return": "error",
+      curly: ["error", "all"],
+      "prefer-promise-reject-errors": "error",
+
+      // Node.js specific
+      "no-process-exit": "error",
+      "no-path-concat": "error",
+
+      // Modern JavaScript
+      "prefer-const": "error",
+      "no-var": "error",
+      "object-shorthand": "error",
+      "prefer-arrow-callback": "error",
+      "prefer-template": "error",
 
       // Stylistic Issues
       indent: ["error", 2],
@@ -28,21 +43,17 @@ export default [
       semi: ["error", "always"],
       "comma-dangle": ["error", "never"],
       "no-trailing-spaces": "error",
-      "eol-last": "error"
+      "eol-last": "error",
+      "brace-style": ["error", "1tbs"]
     }
   },
   {
     files: ["test/**/*.cjs"],
     languageOptions: {
+      sourceType: "script",
       globals: {
-        describe: "readonly",
-        it: "readonly",
-        before: "readonly",
-        after: "readonly",
-        beforeEach: "readonly",
-        afterEach: "readonly",
-        console: "readonly",
-        process: "readonly"
+        ...globals.node,
+        ...globals.mocha
       }
     }
   }

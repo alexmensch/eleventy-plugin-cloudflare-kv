@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-cloudflare-kv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Eleventy plugin that builds collections from content stored in Cloudflare KV as a simple CMS.",
   "main": "index.js",
   "type": "module",
@@ -45,6 +45,7 @@
     "chai": "^5.2.1",
     "chai-as-promised": "^8.0.1",
     "eslint": "^9.33.0",
+    "globals": "^16.3.0",
     "mocha": "^11.7.1",
     "prettier": "^3.6.2",
     "sinon": "^21.0.0",
