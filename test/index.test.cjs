@@ -2,10 +2,13 @@ const { describe, it, beforeEach, afterEach } = require("mocha");
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai").default;
 const chai = require("chai");
-const { expect } = chai;
+const chaiAsPromised = require("chai-as-promised").default;
 const kvCollectionsPlugin = require("../index.js").default;
 
 chai.use(sinonChai);
+chai.use(chaiAsPromised);
+
+const expect = chai.expect;
 
 describe("eleventy-cloudflare-kv", () => {
   let fetchStub;
@@ -259,64 +262,36 @@ This is test content`)
   });
 
   describe("Environment variable validation", () => {
-    it("should throw error when ACCOUNT_ID is missing", async () => {
-      processEnvStub.value({
-        CLOUDFLARE_KV_NS_ID: "test-namespace-id",
-        CLOUDFLARE_API_TOKEN: "test-api-token"
+    const requiredEnvVars = [
+      "CLOUDFLARE_ACCOUNT_ID",
+      "CLOUDFLARE_API_TOKEN",
+      "CLOUDFLARE_KV_NS_ID",
+    ];
+
+    for (const varName of requiredEnvVars) {
+      it(`should throw error when ${varName} is missing`, async () => {
+        const backup = process.env[varName];
+        delete process.env[varName];
+
+        const mockEleventyConfig = {
+          on: sinon.stub(),
+          addCollection: sinon.stub()
+        };
+
+        kvCollectionsPlugin(mockEleventyConfig);
+
+        // Grab the registered "eleventy.before" callback
+        const beforeCallback = mockEleventyConfig.on.getCall(0).args[1];
+
+        // Assert that calling it rejects with the missing var
+        await expect(beforeCallback()).to.be.rejectedWith(new RegExp(varName));
+
+        // restore
+        if (backup !== undefined) {
+          process.env[varName] = backup;
+        }
       });
-
-      const mockEleventyConfig = {
-        on: sinon.stub(),
-        addCollection: sinon.stub()
-      };
-
-      kvCollectionsPlugin(mockEleventyConfig, {});
-
-      const beforeCallback = mockEleventyConfig.on.getCall(0).args[1];
-      await beforeCallback();
-
-      expect(consoleErrorStub).to.have.been.calledWith(
-        sinon.match("❌ Error fetching items from Cloudflare KV:")
-      );
-    });
-
-    it("should throw error when API_TOKEN is missing", async () => {
-      processEnvStub.value({
-        CLOUDFLARE_ACCOUNT_ID: "test-account-id",
-        CLOUDFLARE_KV_NS_ID: "test-namespace-id"
-      });
-
-      const mockEleventyConfig = {
-        on: sinon.stub(),
-        addCollection: sinon.stub()
-      };
-
-      kvCollectionsPlugin(mockEleventyConfig, {});
-
-      const beforeCallback = mockEleventyConfig.on.getCall(0).args[1];
-      await beforeCallback();
-
-      expect(consoleErrorStub).to.have.been.called;
-    });
-
-    it("should throw error when NAMESPACE_ID is missing", async () => {
-      processEnvStub.value({
-        CLOUDFLARE_ACCOUNT_ID: "test-account-id",
-        CLOUDFLARE_API_TOKEN: "test-api-token"
-      });
-
-      const mockEleventyConfig = {
-        on: sinon.stub(),
-        addCollection: sinon.stub()
-      };
-
-      kvCollectionsPlugin(mockEleventyConfig, {});
-
-      const beforeCallback = mockEleventyConfig.on.getCall(0).args[1];
-      await beforeCallback();
-
-      expect(consoleErrorStub).to.have.been.called;
-    });
+    }
   });
 
   describe("Collection processing", () => {
