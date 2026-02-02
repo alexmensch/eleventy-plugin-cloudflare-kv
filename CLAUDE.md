@@ -32,6 +32,7 @@ The entire plugin is contained in `/index.js` (~200 lines). Key functions:
 - **`kvCollectionsPlugin(eleventyConfig, userConfig)`** - Plugin export, registers "eleventy.before" event listener
 
 **Collection organization:** KV key structure determines collections:
+
 - `posts/hello-world` → collection: "posts", item key: "hello-world"
 - `standalone` → collection: "none", item key: "standalone"
 
@@ -42,6 +43,7 @@ Tests are in `/test/index.test.cjs` using Mocha/Chai/Sinon. Coverage thresholds:
 Run a single test file: `npx mocha test/index.test.cjs`
 
 Key testing patterns:
+
 - Stub global `fetch` for API testing
 - Mock `process.env` for environment variables
 - Stub console methods to verify logging behavior
