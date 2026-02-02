@@ -4,8 +4,8 @@
   "exclude": ["test/**", "example/**", "node_modules/**", "coverage/**"],
   "reporter": ["text", "lcov", "html"],
   "check-coverage": true,
-  "lines": 80,
-  "functions": 80,
-  "branches": 70,
-  "statements": 80
+  "lines": 90,
+  "functions": 90,
+  "branches": 90,
+  "statements": 90
 }
