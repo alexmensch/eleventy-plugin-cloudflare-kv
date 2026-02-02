@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/eleventy-plugin-cloudflare-kv.svg)](https://badge.fury.io/js/eleventy-plugin-cloudflare-kv)
 [![Node.js CI](https://github.com/alexmensch/eleventy-plugin-cloudflare-kv/workflows/Node.js%20CI/badge.svg)](https://github.com/alexmensch/eleventy-plugin-cloudflare-kv/actions)
+[![codecov](https://codecov.io/gh/alexmensch/eleventy-plugin-cloudflare-kv/graph/badge.svg)](https://codecov.io/gh/alexmensch/eleventy-plugin-cloudflare-kv)
 
 # eleventy-plugin-cloudflare-kv
 
